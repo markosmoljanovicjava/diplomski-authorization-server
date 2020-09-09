@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.example.demo.constant.ExceptionConstant.USER_NOT_FOUND;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -24,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException(
-                "User not found!"));
+                USER_NOT_FOUND));
         return new UserDetailsImpl(user);
     }
 }
