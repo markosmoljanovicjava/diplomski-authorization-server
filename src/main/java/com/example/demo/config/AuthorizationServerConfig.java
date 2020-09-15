@@ -33,7 +33,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret("{noop}secret1")
                 .authorizedGrantTypes("password")
                 .scopes("read")
-                .accessTokenValiditySeconds(10000)
+                .accessTokenValiditySeconds(1000000000)
                 .and()
 
                 .withClient("rs")
