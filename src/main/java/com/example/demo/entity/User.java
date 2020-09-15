@@ -2,10 +2,7 @@ package com.example.demo.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -17,4 +14,8 @@ public class User {
 
     private String username;
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole role;
 }

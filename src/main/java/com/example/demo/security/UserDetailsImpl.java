@@ -1,11 +1,13 @@
 package com.example.demo.security;
 
 import com.example.demo.entity.User;
+import com.example.demo.entity.UserPermission;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -17,7 +19,10 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+        return user.getRole().getUserPermissions().stream()
+                .map(UserPermission::getName)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     @Override
